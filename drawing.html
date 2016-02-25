@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Sweet Reward</title>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab">
+	<link rel="stylesheet" href="css/memory.css">
+  	<link rel="stylesheet" href="css/global.css">
+  	  <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-59047305-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <style type="text/css">
+    .content {
+    	padding: 0;
+    }
+    </style>
+
+</head>
+<body>
+	<div class = "wrapper">
+	    <div class="content">
+				<div id="co_drawing">
+
+					<div id="mg__start-screen" class="mg__start-screen">
+						<h2 class="mg__start-screen--heading">Welcome to the Co-Drawing Challenge!</h2>      
+						<p class="mg__start-screen--text">You are presented with drawings completed by others. You are supposed to draw upon this. <br><b>The drawing is timed within 15 seconds, once you start!</b></p>      
+						<input type="button" class = "startbtn" onclick="startGame();" value="Start" /> <br>
+						<input type="button" class = "startbtn" onclick="window.location.href='gallery.html';" value="View Gallery" /> <br>
+						<input type="button" class = "homebtn" onclick="window.location.href='index.html';" value="Back to Home" /> 
+					</div>
+
+				</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var w = window.innerWidth;
+		var h = window.innerHeight * 0.9 - 4;
+		var count = 16;
+		function startGame() {
+			var node = document.getElementById("co_drawing");
+			removeChildren(node);
+			node.innerHTML = '<div id="sketchpadapp">\
+						<div class="leftside">\
+			             <span>Timed Drawing: A Monkey</span>\
+			             <button id="mg__button--giveup" class="giveupbtn">End Drawing</button>\
+			             <div id = "timer">Timer Starts!</div>\
+			        </div><div class="rightside"><canvas id="sketchpad"></canvas></div>\
+			    </div>'
+			document.getElementById("sketchpad").width = w;
+			document.getElementById("sketchpad").height = h;
+			document.getElementById("mg__button--giveup").addEventListener("click", function(e) {
+		      //self.resetGame();
+		      window.location.href='survey.html';
+		    });
+			init();
+		    var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+			function timer() {
+			  count = count - 1;
+			  if (count <= 0)
+			  {
+			     clearInterval(counter);
+			     setTimeout(function(){ window.location.href='reward.html' },1000);
+			     return;
+			  }
+			    document.getElementById("timer").innerHTML= count + " secs"; // watch for spelling
+			}
+
+		}
+
+
+	</script>
+	<script src="js/global.js"></script>
+	<script src="js/drawing.js"></script>
+
+</body>
+</html>

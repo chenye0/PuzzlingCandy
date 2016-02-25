@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sliding Puzzle</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab">
+        <link rel="stylesheet" href="css/memory.css">
+    <link rel="stylesheet" href="css/global.css">
+
+    <style type="text/css" media = 'all'>
+
+*{ 
+  margin:0; 
+  padding: 0;
+}
+
+body {
+  /*background-color: #f5fffa;*/
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 125%;
+}
+
+
+form {
+  font-size: 16px;
+  padding-top: 10px;
+  text-align: left;
+}
+
+#middle {
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+}
+
+  img.photo {
+    float: right;
+    padding: 4px;
+    border : 1px solid #1abc9c;
+    margin-left: 20px;
+    width: 120px;
+    height: auto;
+    box-sizing: border-box;
+  }
+
+#my_canvas {
+
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+
+#slider {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline;
+}
+
+.myButton {
+    background-color:#61bf7a;
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    position: relative;
+    display:inline;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:arial;
+    font-size:16px;
+    font-weight:bold;
+    padding:1px 20px;
+    margin:0 20px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+.myButton:hover {
+  background-color:#52783c;
+}
+.myButton:active {
+  position:relative;
+  top:1px;
+}
+</style>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-59047305-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+<body>
+    <div class = "wrapper">
+      <div class="content">
+        <div id="co_drawing">
+
+          <div id="mg__start-screen" class="mg__start-screen">
+            <h2 class="mg__start-screen--heading">Welcome to the Sliding Puzzle!</h2>      
+            <p class="mg__start-screen--text">Look at the original picture at the right side, Tap on the tiles to move it to the white space. <br> Try to recover the picture in least clicks!</p>      
+            <input type="button" class = "startbtn" onclick="startGame();" value="Start" /> <br>
+            <input type="button" class = "homebtn" onclick="window.location.href='index.html';" value="Back to Home" /> 
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+
+</body>
+
+<script>
+function startGame() {
+    var node = document.getElementById("co_drawing");
+      removeChildren(node);
+      node.innerHTML = '<img  class="photo" id = "img" alt="" >\
+        <p> TAP on the tiles to move. Recover this cute husky!</p>\
+          <button id="mg__button--restart" class="giveupbtn">End Game</button>\
+        <canvas id="my_canvas"></canvas>'
+      document.getElementById("mg__button--restart").addEventListener("click", function(e) {
+          //self.resetGame();
+          window.location.href='survey.html';
+        });
+
+  var canvas = null;
+  var context = null;
+
+
+    setup = function() {
+      canvas = document.getElementById("my_canvas");
+      context = canvas.getContext('2d');
+      canvas.width = 600;
+      canvas.height = 480;
+    }
+    setup();
+    var img = new Image();
+    var myphoto = new Array();
+    var tileCount;
+    //myphoto = ['img/bird.jpg', 'img/totoro.jpg','img/dog2.jpg', 'img/panda.jpg','img/child.jpg'];
+    myphoto = ['img/husky.jpg'];
+    img.src = myphoto[Math.floor(Math.random() * myphoto.length)];
+
+    document.getElementById("img").src = img.src;
+
+    img.addEventListener('load', drawTiles, false);
+    var boardWidth = document.getElementById('my_canvas').width;
+    var boardHeight = document.getElementById('my_canvas').height;
+    // var tileCount = document.getElementById('scale').value;
+    //NOTE: REMOVE THE LEVEL
+    // var model= document.getElementsByName('model');
+    // for(var i=0; i<model.length; i++){
+    //   if(model[i].checked){
+    //     tileCount= model[i].value;
+    //   }
+    // }
+    tileCount = 3;
+    var tileWidth = boardWidth / tileCount;
+    var tileHeight = boardHeight / tileCount;
+    var boardParts = new Object;
+    var clickLoc = new Object;
+        clickLoc.x = 0;
+        clickLoc.y = 0;
+
+        var emptyLoc = new Object;
+        emptyLoc.x = 0;
+        emptyLoc.y = 0;
+
+        var solved = false;
+      
+
+    setBoard();
+
+  document.getElementById('my_canvas').onmousemove = function(e) {
+    clickLoc.x = Math.floor((e.pageX - this.offsetLeft) / tileWidth);
+    clickLoc.y = Math.floor((e.pageY - this.offsetTop) / tileHeight);
+  };
+
+  document.getElementById('my_canvas').onclick = function() {
+    if (distance(clickLoc.x, clickLoc.y, emptyLoc.x, emptyLoc.y) == 1) {
+      slideTile(emptyLoc, clickLoc);
+      drawTiles();
+    }
+    if (solved) {
+      //alert("Sweet! Now Open the drawer and get your Candy");
+      setTimeout(function(){window.location.href='reward.html'},1000);
+    }
+  };
+
+  document.getElementById("mg__button--restart").addEventListener("click", function(e) {
+      //self.resetGame();
+       window.location.href='survey.html';
+      //console.log('haha');
+  });
+  function changephoto() {
+    img.src = myphoto[Math.floor(Math.random() * myphoto.length)];
+    document.getElementById("img").src = img.src;
+  }
+
+  function setBoard() {
+      boardParts = new Array(tileCount);
+      for (var i = 0; i < tileCount; ++i) {
+        boardParts[i] = new Array(tileCount);
+        for (var j = 0; j < tileCount; ++j) {
+          boardParts[i][j] = new Object;
+          boardParts[i][j].x = (tileCount - 1) - i;
+          boardParts[i][j].y = (tileCount - 1) - j;
+        }
+      }
+      emptyLoc.x = boardParts[tileCount - 1][tileCount - 1].x;
+      emptyLoc.y = boardParts[tileCount - 1][tileCount - 1].y;
+      solved = false;
+  }
+  function distance(x1, y1, x2, y2) {
+    return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+  };
+
+   function slideTile(toLoc, fromLoc) {
+    if (!solved) {
+      boardParts[toLoc.x][toLoc.y].x = boardParts[fromLoc.x][fromLoc.y].x;
+      boardParts[toLoc.x][toLoc.y].y = boardParts[fromLoc.x][fromLoc.y].y;
+      boardParts[fromLoc.x][fromLoc.y].x = tileCount - 1;
+      boardParts[fromLoc.x][fromLoc.y].y = tileCount - 1;
+      toLoc.x = fromLoc.x;
+      toLoc.y = fromLoc.y;
+      checkSolved();
+    }
+  };
+
+  function checkSolved() {
+    var flag = true;
+    for (var i = 0; i < tileCount; ++i) {
+      for (var j = 0; j < tileCount; ++j) {
+        if (boardParts[i][j].x != i || boardParts[i][j].y != j) {
+          flag = false;
+        }
+      }
+    }
+    solved = flag;
+  };
+
+  function drawTiles() {
+    context.clearRect ( 0 , 0 , boardWidth , boardHeight);
+    for (var i = 0; i < tileCount; ++i) {
+      for (var j = 0; j < tileCount; ++j) {
+        var x = boardParts[i][j].x;
+        var y = boardParts[i][j].y;
+        if(i != emptyLoc.x || j != emptyLoc.y || solved == true) {
+          context.drawImage(img, x * tileWidth, y * tileHeight, tileWidth, tileHeight,
+              i * tileWidth, j * tileHeight, tileWidth, tileHeight);
+        }
+      }
+    }
+  };
+
+}
+
+
+
+
+
+
+</script>
+<script src="js/global.js"></script>
+
+</html>
+

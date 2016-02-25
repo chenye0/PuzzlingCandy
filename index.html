@@ -1,0 +1,85 @@
+  <html>
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Candy Bowl</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" /> 
+    <link rel="stylesheet" href="css/global.css">
+    <style type="text/css">
+
+      h1 {
+        font-size: 2.25em;  /* 36px/16px */
+        line-height: 125%;
+      }
+      h2 {
+        font-size: 1.5em; /*24px/16px */
+        line-height: 150%;
+        padding-top: 8px;
+        margin-bottom: 2px;
+      }
+
+      h3 {
+        font-size: 18px;
+        line-height: 18px;
+        padding-top: 8px;
+        margin-bottom: 2px;
+      }
+
+      #games {
+          margin: 20px auto;
+          width: 100%;
+          text-align: center;
+      }
+
+      #games .game-item {
+        width: 33%;
+        display: inline;
+        float: left;
+        /*margin-right: 20px;*/
+      }
+
+      .gamebtn{
+          -webkit-appearance: none;
+          -webkit-border-radius: 2;
+          -moz-border-radius: 2;
+          width: 90%;
+          height: 180px;
+          border-radius: 2px;
+          border: 0px;
+          color: #ffffff;
+          font-size: 1.25em;
+          background: #5e81d4;
+          text-decoration: none;
+      }
+
+      #header, #content {
+          margin-top: 20px;
+          text-align: center;
+      }
+    </style>
+  <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-59047305-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <div id="header">
+        <h2>Come challenge your fellows in HCDE! Get a sweet reward!</h2>
+    </div>
+    <div id="games">
+        <div id = "game1" class="game-item">
+              <input type="button" class = "gamebtn" onclick="location.href='memory.html';" value="Memory Testing" /> <br>
+        </div>
+        <div id = "game2" class="game-item">
+              <input type="button" class = "gamebtn" onclick="location.href='drawing.html';" value="Co - Drawing" /> <br>
+        </div>
+        <div id = "game3" class="game-item">
+              <input type="button" class = "gamebtn" onclick="location.href='puzzle.html';" value="Sliding Puzzle" /> <br>
+        </div>
+    </div>    
+
+  </body>
+  </html>

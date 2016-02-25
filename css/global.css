@@ -1,0 +1,84 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
+
+*{ margin:0; padding: 0;}
+
+body {
+  font-family: "Roboto Slab", serif;
+  background-color: white;
+  font-size:100%; /*16px */
+  line-height: 150%; /* 24px */
+
+}
+
+
+.startbtn {
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 5px 15px;
+  color: #fff;
+  font-family: helvetica, serif;
+  font-size: 16px;
+  appearance: none;
+  background: #ff3c50;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  cursor: pointer;
+   -webkit-appearance: none;
+}
+
+.homebtn, .giveupbtn {
+   -webkit-appearance: none;
+  margin: 0;
+  display: inline-block;
+  padding: 5px 15px;
+  color: #fff;
+  font-family: helvetica, serif;
+  font-size: 16px;
+  appearance: none;
+  background: #999;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  cursor: pointer;
+}
+.giveupbtn {
+  float: right;
+}
+
+
+
+b {
+  color: #f37821;
+}
+
+
+/************Co-Drawing**********/
+#sketchpadapp {
+    /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.leftside {
+    /*float:left;*/
+    width:100%;
+    height:10%;
+    background-color:#def;
+    padding: 0px 10px;
+    border-radius:4px;
+}
+.rightside {
+    /*float:left;*/
+    /*margin-left:10px;*/
+}
+#sketchpad {
+    height:auto;
+    width:100%;
+    border:2px solid #888;
+    border-radius:4px;
+    position:relative; /* Necessary for correct mouse co-ords in Firefox */
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="A memory game, built for fun with HTML, CSS, and JavaScript.">
+  <meta name="author" content="Nick Salloum">
+
+  <!-- title -->
+  <title>Memory Game!</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/memory.css">
+
+  <!-- og -->
+  <meta property="og:title" content="Memory Game!">
+  <meta property="og:url" content="http://callmenick.com/memory/">
+  <meta property="og:image" content="http://callmenick.com/memory/img/og-image.png">
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-59047305-1', 'auto');
+      ga('send', 'pageview');
+  </script>
+</head>
+<body>
+  
+  <div class="wrapper">
+    
+    <div class="header clearfix">
+      <div class="header__logo">
+        <a href="index.html">
+          <!-- <img src="img/green.png" alt="candy bowl"> -->
+        </a>
+      </div>
+      <h1 class="header__title">Memory Game!</h1>
+    </div><!-- /.header -->
+    
+    <div class="content">
+      <div class="container">
+        
+        <div id="my-memory-game"></div>
+
+      </div>
+    </div><!-- /.content -->
+
+  </div><!-- /.wrapper -->
+  
+  <!-- js -->
+  <script src="js/classList.min.js"></script>
+  <script src="js/memory.js"></script>
+
+  <!-- start memory! -->
+  <script>
+    (function(){
+      var myMem = new Memory({
+        wrapperID : "my-memory-game",
+        cards : [
+          {
+            id : 1,
+            img: "img/default/uw-01.png"
+          },
+          {
+            id : 2,
+            img: "img/default/uw-02.png"
+          },
+          {
+            id : 3,
+            img: "img/default/uw-03.png"
+          },
+          {
+            id : 4,
+            img: "img/default/monsters-04.png"
+          },
+          {
+            id : 5,
+            img: "img/default/monsters-05.png"
+          },
+          {
+            id : 6,
+            img: "img/default/monsters-06.png"
+          },
+          {
+            id : 7,
+            img: "img/default/monsters-07.png"
+          },
+          {
+            id : 8,
+            img: "img/default/monsters-08.png"
+          },
+          {
+            id : 9,
+            img: "img/default/monsters-09.png"
+          },
+          {
+            id : 10,
+            img: "img/default/monsters-10.png"
+          },
+          {
+            id : 11,
+            img: "img/default/monsters-11.png"
+          },
+          {
+            id : 12,
+            img: "img/default/monsters-12.png"
+          },
+          {
+            id : 13,
+            img: "img/default/monsters-13.png"
+          },
+          {
+            id : 14,
+            img: "img/default/monsters-14.png"
+          },
+          {
+            id : 15,
+            img: "img/default/monsters-15.png"
+          },
+          {
+            id : 16,
+            img: "img/default/monsters-16.png"
+          }
+        ],
+        onGameStart : function() { return false; },
+        onGameEnd : function() { 
+        	setTimeout(function(){window.location.href='survey.html'},3000);
+        	return false; 
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Sweet Reward</title>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab">
+	<link rel="stylesheet" href="css/memory.css">
+  	<link rel="stylesheet" href="css/global.css">
+
+</head>
+<body>
+	<div class = "wrapper">
+	    <div class="content">
+		    <div class = "container">
+				<div id="co_drawing">
+
+					<div id="mg__start-screen" class="mg__start-screen">
+						<h2 class="mg__start-screen--heading">Welcome to the Co-Drawing Challenge!</h2>      
+						<p class="mg__start-screen--text">You are presented with drawings completed by others. You are supposed to draw upon this. The drawing is timed within <b>15 seconds</b></p>      
+						<input type="button" class = "startbtn" onclick="startGame();" value="Ready? Start" /> 
+						<input type="button" class = "startbtn" onclick="window.location.href='index.html';" value="Back to Home" /> 
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		function startGame() {
+			var node = document.getElementById("co_drawing");
+			removeChildren(node);
+			node.innerHTML = '<div id="sketchpadapp">\
+						<div class="leftside">\
+			             <p>Timed Drawing: <b style= "color: red">A Monkey</b></p>\
+			             <button id="mg__button--giveup" class="mg__button">End Game</button>\
+			        </div><div class="rightside"><canvas id="sketchpad" height="400" width="960"></canvas></div>\
+			    </div>'
+			document.getElementById("mg__button--giveup").addEventListener("click", function(e) {
+		      //self.resetGame();
+		      window.location.href='survey.html';
+		    });
+			init();
+		}
+		setTimeout(function(){window.location.href='reward.html'},500000000);
+	</script>
+	<script src="js/global.js"></script>
+	<script src="js/drawing.js"></script>
+
+</body>
+</html>
