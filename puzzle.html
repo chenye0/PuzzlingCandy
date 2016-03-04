@@ -9,8 +9,8 @@
 
     <style type="text/css" media = 'all'>
 
-*{ 
-  margin:0; 
+*{
+  margin:0;
   padding: 0;
 }
 
@@ -93,14 +93,8 @@ form {
   top:1px;
 }
 </style>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-59047305-1', 'auto');
-        ga('send', 'pageview');
-    </script>
+  <script src="js/analytics.js"></script>
+
 </head>
 
 <body>
@@ -109,10 +103,10 @@ form {
         <div id="co_drawing">
 
           <div id="mg__start-screen" class="mg__start-screen">
-            <h2 class="mg__start-screen--heading">Welcome to the Sliding Puzzle!</h2>      
-            <p class="mg__start-screen--text">Look at the original picture at the right side, Tap on the tiles to move it to the white space. <br> Try to recover the picture in least clicks!</p>      
+            <h2 class="mg__start-screen--heading">Welcome to the Sliding Puzzle!</h2>
+            <p class="mg__start-screen--text">Look at the original picture at the right side, Tap on the tiles to move it to the white space. <br> Try to recover the picture in least clicks!</p>
             <input type="button" class = "startbtn" onclick="startGame();" value="Start" /> <br>
-            <input type="button" class = "homebtn" onclick="window.location.href='index.html';" value="Back to Home" /> 
+            <input type="button" class = "homebtn" onclick="window.location.href='index.html';" value="Back to Home" />
           </div>
 
         </div>
@@ -122,6 +116,7 @@ form {
 
 </body>
 
+<script src="js/global.js"></script>
 <script>
 function startGame() {
     var node = document.getElementById("co_drawing");
@@ -179,7 +174,7 @@ function startGame() {
         emptyLoc.y = 0;
 
         var solved = false;
-      
+
 
     setBoard();
 
@@ -195,6 +190,7 @@ function startGame() {
     }
     if (solved) {
       //NOTE: WIN STATE
+      openDrawer();
       setTimeout(function(){window.location.href='reward.html'},1000);
     }
   };
@@ -267,13 +263,7 @@ function startGame() {
 
 }
 
-
-
-
-
-
 </script>
-<script src="js/global.js"></script>
 
 </html>
 
